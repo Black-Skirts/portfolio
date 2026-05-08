@@ -96,7 +96,7 @@ export const IntroLoader: React.FC<IntroLoaderProps> = ({ onComplete }) => {
         })}
 
         <div className={`absolute inset-0 flex items-center justify-center transition-all duration-1000 ${stage >= 3 ? 'opacity-100 scale-100 blur-0' : 'opacity-0 scale-90 blur-xl pointer-events-none'}`}>
-          <span className="text-[clamp(80px,12vw,180px)] font-black text-white tracking-tighter">369.</span>
+          <span className="text-[clamp(80px,12vw,180px)] font-black text-white tracking-tighter">SML.</span>
         </div>
       </div>
     </div>

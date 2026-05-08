@@ -189,28 +189,31 @@ const Clock = () => {
   );
 };
 
-const ServiceList = () => {
-  const items = [
-    { work: 'Brand design', cat: 'Brand design' },
-    { work: 'Graphic design', cat: 'Graphic design' },
-    { work: 'Motion Graphic', cat: 'Motion Graphic' },
-    { work: 'Editorial+Book Design.', cat: 'Editorial+Book Design.' },
-    { work: 'Product Detail Page', cat: 'Product Detail Page' },
-    { work: 'Development', cat: 'Development' },
-  ];
+const SERVICE_DATA = {
+  first: {
+    left: { header: 'Work', items: ['Brand Identity', 'Visual Systems', 'Art Direction', 'Editorial Design', 'Typeface Design', 'UI / UX Design'] },
+    right: { header: 'Category', items: ['Entertainment', 'Consumer Goods', 'Broadcasting', 'Fashion & Lifestyle', 'Corporate', 'Digital Product'] },
+  },
+  second: {
+    left: { header: 'Direction', items: ['Brand Strategy', 'Concept Development', 'Visual Language', 'System Thinking', 'Narrative & Tone', 'Experience Design'] },
+    right: { header: 'Technology', items: ['Motion Graphic', 'AR / XR', '3D', 'Development', 'Interaction', 'Generative AI'] },
+  },
+};
 
+const ServiceList = ({ section }: { section: 'first' | 'second' }) => {
+  const { left, right } = SERVICE_DATA[section];
   return (
     <div className="grid grid-cols-2 gap-x-8 text-[14px] leading-[1.4] tracking-tight">
       <div className="flex flex-col">
-        <p className="font-bold mb-2 text-white">Work</p>
+        <p className="font-semibold mb-2 text-white">{left.header}</p>
         <div className="space-y-0.5">
-          {items.map((item, i) => <p key={i} className="font-semibold text-[#A5A5A5]">{item.work}</p>)}
+          {left.items.map((item, i) => <p key={i} className="font-medium text-[#A5A5A5]">{item}</p>)}
         </div>
       </div>
       <div className="flex flex-col">
-        <p className="font-bold mb-2 text-white">Category</p>
+        <p className="font-semibold mb-2 text-white">{right.header}</p>
         <div className="space-y-0.5">
-          {items.map((item, i) => <p key={i} className="font-semibold text-[#A5A5A5]">{item.cat}</p>)}
+          {right.items.map((item, i) => <p key={i} className="font-medium text-[#A5A5A5]">{item}</p>)}
         </div>
       </div>
     </div>
@@ -218,22 +221,21 @@ const ServiceList = () => {
 };
 
 const AWARDS_DATA = [
-  {
-    title: 'Kaywon Play Sans',
-    award: 'Reddot Typeface Winner',
-    year: '2024',
-    img: 'https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&q=80&w=1200'
-  },
-  {
-    title: '369 Identity System',
-    award: 'iF Design Award',
-    year: '2023',
-    img: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=1200'
-  }
+  { award: 'IF Award',            project: 'Pledis Entertainment',            img: '/images/projects/1.jpg', url: 'https://ifdesign.com/en/winner-ranking/project/pledis-entertainment/751205' },
+  { award: 'Koto Award',          project: 'Pledis Entertainment',            img: '/images/projects/1.jpg', url: 'https://www.kgd-a.org/2025-laureates/en/pledis-entertainment-corporate-identity-development' },
+  { award: 'German Design Award', project: 'Pledis Entertainment',            img: '/images/projects/1.jpg', url: 'https://www.german-design-award.com/en/gallery/detail/corporate-identity/pledis-entertainment' },
+  { award: 'German Design Award', project: 'Channel A',                       img: '/images/projects/5.jpg', url: 'https://www.german-design-award.com/en/gallery/detail/corporate-identity/channel-a' },
+  { award: 'Red Dot Winner',      project: 'Kaywon Play Sans',                img: '/images/projects/7.jpg', url: 'https://www.red-dot.org/project/kaywon-university-of-art-design-kaywon-play-sans-black-73026' },
+  { award: 'Red Dot Winner',      project: 'Kaywon Degree Show in 2021~2023', img: '/images/projects/9.jpeg', url: 'https://www.red-dot.org/project/kaywon-university-of-art-design-kaywon-art-design-festival-kaywon-degree-show-in-2021-2023-73025' },
 ];
 
 export const Information: React.FC = () => {
   const [isClockHovered, setIsClockHovered] = useState(false);
+  const [hoveredAward, setHoveredAward] = useState<number | null>(null);
+
+  const handleAwardClick = (url: string) => {
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
 
   return (
     <section className="pt-32 md:pt-64 pb-32 bg-black text-white min-h-screen">
@@ -242,8 +244,9 @@ export const Information: React.FC = () => {
         <div className="grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 gap-3 mb-32">
           <div className="col-span-4 md:col-span-8 lg:col-span-12">
             <FadeInUp>
-              <h1 className="text-[clamp(29px,4.5vw,62px)] font-semibold leading-[1.1] tracking-[-0.01em]">
-                369 Creative is a design studio of expansion and vision, partnering with our generation’s leading innovators to create work that resonates, defines, and moves culture forward.
+              <h1 className="text-[clamp(26px,4vw,58px)] font-semibold leading-[1.1] tracking-[-0.01em]">
+                SML is an independent designer working at the intersection of brand, interface, and culture.
+                Collaborating with forward-thinking teams and individuals, SML builds identities and experiences that are clear, refined, and built to evolve.
               </h1>
             </FadeInUp>
           </div>
@@ -253,7 +256,7 @@ export const Information: React.FC = () => {
         <div className="grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 gap-x-3 gap-y-0 mb-48 lg:min-h-[500px]">
           <div className="col-span-4 lg:col-span-3 lg:col-start-1 lg:row-start-1 self-start mb-12 lg:mb-0">
             <div className="mb-4 inline-block">
-              <h2 className="text-[20px] font-bold tracking-tight pb-0 leading-tight">
+              <h2 className="text-[20px] font-semibold tracking-tight pb-0 leading-tight">
                 Contact
               </h2>
               <AnimatedLine className="h-[0.5px] bg-white w-full" />
@@ -285,7 +288,7 @@ export const Information: React.FC = () => {
                 alt="Gold bars"
                />
             </div>
-            <p className="text-[10px] font-bold tracking-tight opacity-60">I Know, Your Time is Gold...</p>
+            <p className="text-[10px] font-semibold tracking-tight opacity-60">I Know, Your Time is Gold...</p>
           </div>
 
           <div 
@@ -304,76 +307,46 @@ export const Information: React.FC = () => {
           <AnimatedLine className="w-full h-[0.5px] bg-white" />
           <div className="grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 gap-x-3 gap-y-12">
             <div className="col-span-4 md:col-span-4 lg:col-span-6 pt-[16px]">
-              <h2 className="text-[clamp(48px,6vw,90px)] font-bold tracking-tight leading-none">
-                <ScrambledTitle text="What We Do" />
+              <h2 className="text-[clamp(48px,6vw,90px)] font-semibold tracking-tight leading-none">
+                <ScrambledTitle text="Practice" />
               </h2>
             </div>
             
             <div className="col-span-4 md:col-span-4 lg:col-span-6 pt-[16px]">
               <FadeInUp>
                 <div className="mb-[42px]">
-                  <ServiceList />
+                  <ServiceList section="first" />
                 </div>
               </FadeInUp>
               <AnimatedLine className="w-full h-[0.5px] bg-white mb-[16px]" />
               <FadeInUp delay={100}>
-                <ServiceList />
+                <ServiceList section="second" />
               </FadeInUp>
             </div>
           </div>
         </div>
 
         {/* Awards Section */}
-        <div className="mb-48">
-          <h2 className="text-[clamp(48px,6vw,90px)] font-bold tracking-tight leading-none mb-8">
-            <ScrambledTitle text="Awards" />
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            {AWARDS_DATA.map((award, i) => (
-              <FadeInUp key={i} delay={i * 100}>
-                <div className="group cursor-pointer">
-                  <div className="aspect-[1.5/1] bg-[#121212] rounded-[20px] overflow-hidden mb-2.5">
-                    <img 
-                      src={award.img}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90"
-                      alt={award.title}
-                    />
-                  </div>
-                  <div className="grid grid-cols-2 px-1 leading-[1.4] tracking-tight">
-                    <span className="text-[14px] font-bold text-white">{award.title}</span>
-                    <div className="text-left">
-                      <p className="text-[14px] font-semibold text-white">{award.award}</p>
-                      <p className="text-[14px] font-semibold text-white">{award.year}</p>
-                    </div>
-                  </div>
-                </div>
-              </FadeInUp>
-            ))}
-          </div>
-        </div>
-
-        {/* Member Section */}
-        <div className="pt-0 mb-48">
+        <div className="pt-0 mb-48 relative">
           <AnimatedLine className="w-full h-[0.5px] bg-white" />
           <div className="grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 gap-x-3 gap-y-12">
             <div className="col-span-4 md:col-span-4 lg:col-span-6 pt-[16px]">
-              <h2 className="text-[clamp(48px,6vw,90px)] font-bold tracking-tight leading-none">
-                <ScrambledTitle text="Member" />
+              <h2 className="text-[clamp(48px,6vw,90px)] font-semibold tracking-tight leading-none">
+                <ScrambledTitle text="Awards" />
               </h2>
             </div>
             <div className="col-span-4 md:col-span-4 lg:col-span-6">
               <div>
-                {[
-                  { role: 'Co-Founder & Designer', name: 'Seungmin Lee' },
-                  { role: 'Co-Founder & Art Director', name: 'Seungmin Lee' },
-                  { role: 'Video Designer', name: 'Hyunho Lee' },
-                  { role: 'Interior Designer', name: 'Sang Baek Ha' },
-                  { role: 'Web Developer', name: 'Yujin Lee' },
-                ].map((member, i) => (
-                  <FadeInUp key={i} delay={i * 50}>
-                    <div className="grid grid-cols-2 py-4 text-[13px] font-bold tracking-tight">
-                      <span className="">{member.role}</span>
-                      <span className="text-right md:text-left">{member.name}</span>
+                {AWARDS_DATA.map((award, i) => (
+                  <FadeInUp key={i} delay={i * 40}>
+                    <div
+                      className="grid grid-cols-2 py-4 text-[13px] font-semibold tracking-tight transition-opacity duration-200 hover:opacity-60 cursor-pointer"
+                      onMouseEnter={() => setHoveredAward(i)}
+                      onMouseLeave={() => setHoveredAward(null)}
+                      onClick={() => handleAwardClick(award.url)}
+                    >
+                      <span>{award.award}</span>
+                      <span className="text-right md:text-left">{award.project}</span>
                     </div>
                     <AnimatedLine className="w-full h-[0.5px] bg-white" />
                   </FadeInUp>
@@ -381,7 +354,18 @@ export const Information: React.FC = () => {
               </div>
             </div>
           </div>
+          {/* Hover preview image */}
+          <div
+            className={`absolute right-0 top-16 w-[180px] aspect-square overflow-hidden rounded-[12px] pointer-events-none transition-opacity duration-300 ${hoveredAward !== null ? 'opacity-100' : 'opacity-0'}`}
+          >
+            <img
+              src={hoveredAward !== null ? AWARDS_DATA[hoveredAward].img : ''}
+              alt=""
+              className="w-full h-full object-cover"
+            />
+          </div>
         </div>
+
       </GridContainer>
     </section>
   );

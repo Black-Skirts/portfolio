@@ -13,7 +13,7 @@ export const GridContainer: React.FC<GridContainerProps> = ({ children, classNam
   // 1024–1439px: margin 32px (px-[32px])
   // >=1440px: margin 40px (px-[40px])
   return (
-    <div className={`mx-auto w-full px-[16px] md:px-[24px] lg:px-[32px] min-[1440px]:px-[40px] ${className}`}>
+    <div className={`mx-auto w-full px-[16px] md:px-[24px] lg:px-[40px] min-[1440px]:px-[40px] min-[1920px]:px-[80px] min-[2560px]:px-[80px] ${className}`}>
       {children}
     </div>
   );

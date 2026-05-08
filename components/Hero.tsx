@@ -5,7 +5,12 @@ import { CATEGORIES } from '../constants';
 
 const SCRAMBLE_CHARS = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()';
 
-export const Hero: React.FC = () => {
+interface HeroProps {
+  activeCategory: string;
+  onCategoryChange: (cat: string) => void;
+}
+
+export const Hero: React.FC<HeroProps> = ({ activeCategory, onCategoryChange }) => {
   const [displayNumber, setDisplayNumber] = useState('0');
   const [displayText, setDisplayText] = useState('Works');
   const sectionRef = useRef<HTMLElement>(null);
@@ -73,12 +78,13 @@ export const Hero: React.FC = () => {
 
   const CategoryMenu = () => (
     <>
-      <span className="text-[#A5A5A5] text-[14px] font-semibold tracking-tight">Category</span>
+      <span className="text-[#A5A5A5] text-[14px] font-[550] tracking-tight">Category</span>
       <div className="flex flex-wrap gap-x-6 gap-y-2 items-center">
-        {CATEGORIES.map((cat, idx) => (
-          <button 
-            key={cat} 
-            className={`text-[21px] font-semibold transition-colors tracking-tight ${idx === 0 ? 'text-black' : 'text-[#B8B8B8] hover:text-black'}`}
+        {CATEGORIES.map((cat) => (
+          <button
+            key={cat}
+            onClick={() => onCategoryChange(cat)}
+            className={`text-[21px] font-[550] transition-colors tracking-tight ${activeCategory === cat ? 'text-black' : 'text-[#B8B8B8] hover:text-black'}`}
           >
             {cat}
           </button>
@@ -93,14 +99,14 @@ export const Hero: React.FC = () => {
         <div className="grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 gap-3 items-baseline">
           {/* "8" remains in col-span-1 */}
           <div className="col-span-1">
-            <h1 className="text-[clamp(72px,7vw,150px)] font-bold leading-[0.8] tabular-nums tracking-tighter">
+            <h1 className="text-[clamp(72px,7vw,150px)] font-semibold leading-[0.8] tabular-nums tracking-tighter">
               {displayNumber}
             </h1>
           </div>
 
           {/* "Works" text */}
           <div className="col-span-3 md:col-span-7 lg:col-start-4 lg:col-span-9 flex flex-col">
-            <h2 className="text-[clamp(72px,7vw,150px)] font-bold leading-[0.8] tracking-tighter">
+            <h2 className="text-[clamp(72px,7vw,150px)] font-semibold leading-[0.8] tracking-tighter">
               {displayText}
             </h2>
             

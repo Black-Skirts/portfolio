@@ -1,0 +1,6 @@
+{
+  "name": "Worxphere_Web_Main_KV",
+  "description": "A high-performance interactive 3D sphere visualization with multiple orbits and floating labels using Canvas 2D and perspective projection.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}

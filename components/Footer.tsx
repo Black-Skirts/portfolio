@@ -10,13 +10,13 @@ interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = ({ isDark = false }) => {
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [contactDisplay, setContactDisplay] = useState('Contact Us');
-  const [emailDisplay, setEmailDisplay] = useState('Hello@369creative.co');
+  const [contactDisplay, setContactDisplay] = useState('Contact Me');
+  const [emailDisplay, setEmailDisplay] = useState('leeseungmin.work@gmail.com');
   
   const footerRef = useRef<HTMLDivElement>(null);
   const observerRef = useRef<IntersectionObserver | null>(null);
-  const targetContact = 'Contact Us';
-  const targetEmail = 'Hello@369creative.co';
+  const targetContact = 'Contact Me';
+  const targetEmail = 'leeseungmin.work@gmail.com';
 
   const scrambleText = (target: string, setter: (val: string) => void, iterations: number = 20) => {
     let count = 0;
@@ -48,7 +48,9 @@ export const Footer: React.FC<FooterProps> = ({ isDark = false }) => {
       const rect = footerRef.current.getBoundingClientRect();
       const windowHeight = window.innerHeight;
       const elementVisibleHeight = windowHeight - rect.top;
-      const progress = Math.min(Math.max(elementVisibleHeight / (windowHeight * 0.8), 0), 1);
+      const isMobile = window.innerWidth < 768;
+      const divisor = isMobile ? windowHeight * 0.4 : windowHeight * 0.8;
+      const progress = Math.min(Math.max(elementVisibleHeight / divisor, 0), 1);
       setScrollProgress(progress);
     };
 
@@ -90,12 +92,12 @@ export const Footer: React.FC<FooterProps> = ({ isDark = false }) => {
     <footer className={`pt-12 transition-colors duration-300 ${isDark ? 'bg-black' : 'bg-white'}`} ref={footerRef}>
       <GridContainer>
         <div className="mb-8">
-          <h2 className={`text-[clamp(44px,5vw,100px)] font-bold leading-none mb-1 tracking-tighter tabular-nums min-h-[1.1em] ${textPrimaryClass}`}>
+          <h2 className={`text-[clamp(44px,5vw,100px)] font-semibold leading-none mb-1 tracking-tighter tabular-nums min-h-[1.1em] ${textPrimaryClass}`}>
             {contactDisplay}
           </h2>
           <a 
-            href="mailto:Hello@369creative.co" 
-            className={`text-[clamp(44px,5vw,100px)] font-bold leading-none transition-colors tracking-tighter block tabular-nums break-all lg:break-normal min-h-[1.1em] ${textSecondaryClass} ${textHoverClass}`}
+            href="mailto:leeseungmin.work@gmail.com" 
+            className={`text-[clamp(44px,5vw,100px)] font-semibold leading-none transition-colors tracking-tighter block tabular-nums break-all lg:break-normal min-h-[1.1em] ${textSecondaryClass} ${textHoverClass}`}
           >
             {emailDisplay}
           </a>
@@ -103,16 +105,16 @@ export const Footer: React.FC<FooterProps> = ({ isDark = false }) => {
       </GridContainer>
 
       {/* Huge full-bleed 369 with Scroll Interaction */}
-      <div className="w-full overflow-hidden select-none pointer-events-none mb-0 flex justify-center items-center pr-[3vw] md:pr-[4vw]">
-        <h1 
-          className={`text-[55vw] font-bold leading-[0.8] tracking-[-0.07em] text-center w-full whitespace-nowrap block pb-[1vw] transition-all duration-100 ease-out will-change-transform ${textPrimaryClass}`}
+      <div className="w-full overflow-hidden select-none pointer-events-none mb-0 flex justify-center items-center pr-[3vw] md:pr-[4vw] lg:pr-[3vw]">
+        <h1
+          className={`text-[48vw] lg:text-[48vw] min-[1440px]:text-[48vw] min-[1920px]:text-[48vw] min-[2560px]:text-[50vw] min-[3840px]:text-[51vw] font-semibold leading-[0.8] tracking-[-0.07em] text-center w-full whitespace-nowrap block pb-[1vw] transition-all duration-100 ease-out will-change-transform ${textPrimaryClass}`}
           style={{
             transform: `scale(${0.85 + (scrollProgress * 0.15)})`,
             opacity: isDark ? 0.05 + (scrollProgress * 0.95) : 0.1 + (scrollProgress * 0.9),
             filter: `blur(${(1 - scrollProgress) * 20}px)`,
           }}
         >
-          369
+          SML
         </h1>
       </div>
 
@@ -120,22 +122,22 @@ export const Footer: React.FC<FooterProps> = ({ isDark = false }) => {
         <div className={`py-8 grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 gap-3 items-end text-[12px] tracking-tight leading-tight ${textPrimaryClass}`}>
           {/* Contact Column */}
           <div className="col-span-4 md:col-span-3 lg:col-span-3 flex flex-col mb-6 md:mb-0">
-            <p className="font-bold mb-0">Contact</p>
-            <a href="mailto:leeseungmin.work@gmail.com" className="underline font-semibold hover:opacity-50 transition-opacity">
+            <p className="font-semibold mb-0">Contact</p>
+            <a href="mailto:leeseungmin.work@gmail.com" className="underline font-medium hover:opacity-50 transition-opacity">
               leeseungmin.work@gmail.com
             </a>
           </div>
 
           {/* Copyright Column - 3 columns on mobile to leave 1 for Scroll Top */}
-          <div className="col-span-3 md:col-span-4 lg:col-start-4 lg:col-span-5 font-semibold">
-            ©Copyright 2025 leeseungmin.work
+          <div className="col-span-3 md:col-span-4 lg:col-start-4 lg:col-span-5 font-medium">
+            ©Copyright 2026 leeseungmin.work
           </div>
 
           {/* Scroll Top Column - 1 column on mobile, aligned right */}
           <div className="col-span-1 md:col-start-8 lg:col-start-9 lg:col-span-4 flex justify-end">
             <button 
               onClick={scrollToTop}
-              className="font-semibold hover:opacity-50 transition-opacity whitespace-nowrap"
+              className="font-medium hover:opacity-50 transition-opacity whitespace-nowrap"
             >
               Scroll Top
             </button>

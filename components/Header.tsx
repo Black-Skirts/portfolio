@@ -76,7 +76,6 @@ export const Header: React.FC<HeaderProps> = ({
   const menuItems = [
     { label: 'Project', action: handleHomeClick },
     { label: 'Information', action: handleInfoClick },
-    { label: 'News', action: handleNewsClick },
     { label: 'Archive', action: handleArchiveClick },
   ];
 
@@ -86,11 +85,11 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 gap-3 items-center">
           
           <div className="col-span-1">
-            <button 
+            <button
               onClick={handleHomeClick}
-              className={`text-[24px] font-bold leading-none tracking-tighter hover:opacity-50 transition-colors ${isOpen ? 'text-black' : 'text-white'}`}
+              className={`text-[26px] font-semibold leading-none tracking-tighter hover:opacity-50 transition-opacity ${isOpen ? 'text-black' : 'text-white'}`}
             >
-              369.
+              SML
             </button>
           </div>
 
@@ -107,13 +106,7 @@ export const Header: React.FC<HeaderProps> = ({
             >
               Information
             </button>
-            <button 
-              onClick={handleNewsClick}
-              className={`hover:opacity-50 transition-opacity ${currentView === 'news' ? 'underline underline-offset-4 decoration-1' : ''}`}
-            >
-              News
-            </button>
-            <button 
+            <button
               onClick={handleArchiveClick}
               className={`hover:opacity-50 transition-opacity ${currentView === 'archive' ? 'underline underline-offset-4 decoration-1' : ''}`}
             >
@@ -138,7 +131,7 @@ export const Header: React.FC<HeaderProps> = ({
             >
               Behance
             </a>
-            <a href="mailto:Hello@369creative.co" className="hover:opacity-50 transition-opacity">Hello@369creative.co</a>
+            <a href="mailto:leeseungmin.work@gmail.com" className="hover:opacity-50 transition-opacity">leeseungmin.work@gmail.com</a>
           </div>
 
           <div className="lg:hidden col-start-4 md:col-start-8 flex justify-end">
@@ -156,7 +149,7 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* Mobile Menu Overlay */}
         <div className={`fixed inset-0 bg-white z-[60] flex flex-col items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.85,0,0.15,1)] ${isOpen ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'}`}>
-          <div className="flex flex-col items-center gap-6 text-[32px] font-bold text-black tracking-tighter">
+          <div className="flex flex-col items-center gap-6 text-[32px] font-semibold text-black tracking-tighter">
             {menuItems.map((item, idx) => (
               <div key={item.label} className="overflow-hidden">
                 <button 
@@ -191,11 +184,11 @@ export const Header: React.FC<HeaderProps> = ({
                 Behance
               </a>
               <a 
-                href="mailto:Hello@369creative.co" 
+                href="mailto:leeseungmin.work@gmail.com" 
                 onClick={() => setIsOpen(false)}
                 className="hover:text-black transition-colors"
               >
-                Hello@369creative.co
+                leeseungmin.work@gmail.com
               </a>
             </div>
           </div>

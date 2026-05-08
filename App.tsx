@@ -15,21 +15,20 @@ type View = 'home' | 'information' | 'news' | 'archive' | 'detail';
 function App() {
   const [view, setView] = useState<View>('home');
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [activeCategory, setActiveCategory] = useState<string>('All');
 
-  // Scroll to top on view change
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [view]);
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
 
   const navigateToDetail = (project: Project) => {
+    scrollToTop();
     setSelectedProject(project);
     setView('detail');
   };
 
-  const navigateToHome = () => setView('home');
-  const navigateToInfo = () => setView('information');
-  const navigateToNews = () => setView('news');
-  const navigateToArchive = () => setView('archive');
+  const navigateToHome = () => { scrollToTop(); setView('home'); };
+  const navigateToInfo = () => { scrollToTop(); setView('information'); };
+  const navigateToNews = () => { scrollToTop(); setView('news'); };
+  const navigateToArchive = () => { scrollToTop(); setView('archive'); };
 
   const isDarkBackground = view === 'information' || view === 'archive';
 
@@ -45,8 +44,8 @@ function App() {
       <main>
         {view === 'home' && (
           <>
-            <Hero />
-            <ProjectGrid onProjectClick={navigateToDetail} />
+            <Hero activeCategory={activeCategory} onCategoryChange={setActiveCategory} />
+            <ProjectGrid onProjectClick={navigateToDetail} activeCategory={activeCategory} />
           </>
         )}
         {view === 'information' && <Information />}
